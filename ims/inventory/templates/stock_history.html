@@ -1,0 +1,55 @@
+{% extends "index.html" %} {% block content %}
+<div class="container-fluid">
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="font-weight-bold text-center">
+          <b>CHECKOUT</b>
+        </h2>
+      </div>
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">S.no</th>
+                <th>Item Name</th>
+                <th>Issue Quantity</th>
+                <th>Issued To</th>
+                <th>Phone Number</th>
+                <th>Issued By</th>
+                <th>Issue Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if issued_items %} {% for item in issued_items %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.issue_quantity }}</td>
+                <td>{{ item.issue_to }}</td>
+                <td>{{ item.phone_number }}</td>
+                <td>{{ request.session.username }}</td>
+                <td>{{ item.timestamp }}</td>
+                <td>
+                  <small class="badge badge-success">Issued Successfully</small>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="7">No items have been issued.</td>
+              </tr>
+              {% endfor %} {% else %}
+              <tr>
+                <td colspan="7">No items have been issued.</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

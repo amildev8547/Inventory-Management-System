@@ -1,0 +1,28 @@
+{% extends "index.html" %} {% block content %}{% load crispy_forms_tags %}
+<div class="container">
+  <div class="row">
+    
+  </div>
+  <div class="row justify-content-center">
+    
+    <div class="col-md-8">
+      <br>
+      <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card">
+         
+          <BR>
+            <div><h2 class="font-weight-bold">
+              <b><center>UPDATE STOCK ITEMS</center></b>
+            </h2></div><HR>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %} {{ form|crispy }}
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+          </div></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

@@ -1,0 +1,409 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <!--  Prevent admin panel being crawled by search engines -->
+    <meta name="robots" content="none, noarchive" />
+
+    <title>|INVENTO|</title>
+    
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="/static/vendor/fontawesome-free/css/all.min.css"
+    />
+    <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.min.css"
+  />
+    <!-- Bootstrap and adminLTE -->
+    <link
+      rel="stylesheet"
+      href="/static/vendor/adminlte/css/adminlte.min.css"
+      id="adminlte-css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <!-- Bootswatch theme -->
+
+    <link
+      rel="stylesheet"
+      href="/static/vendor/bootswatch/sandstone/bootstrap.min.css"
+      id="jazzmin-theme"
+    />
+
+    <!-- Custom fixes for django -->
+    <link rel="stylesheet" href="/static/jazzmin/css/main.css" />
+    
+    <!-- favicons -->
+    <link
+      rel="shortcut icon"
+      href="/static/images/images.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+    <link
+      rel="icon"
+      href="/static/images/images.png"
+      sizes="32x32"
+      type="image/png"
+    />
+
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+      rel="stylesheet"
+    />
+  <style>
+    @media only screen and (max-width: 767px) {
+      #jazzy-sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        height: 100%;
+        width: 300px;
+        z-index: 1031;
+        transition: all 0.3s ease-in-out;
+      }
+    
+      #jazzy-sidebar.active {
+        left: 0;
+      }
+    
+      #jazzy-logo {
+        display: none;
+      }
+    
+      .sidebar {
+        margin-top: 0;
+        padding-top: 50px;
+      }
+    
+      .nav-sidebar .nav-link {
+        padding: 10px;
+      }
+    
+      .nav-header {
+        padding: 10px;
+        font-size: 1.2rem;
+      }
+    }
+    
+    .main-footer {
+      color: black; 
+    }
+    #myChart {
+      width: 100;
+      height: 100;
+    }
+
+  </style>
+  </head>
+  
+  <body
+    class="hold-transition sidebar-mini dashboard accent-indigo layout-navbar-fixed layout-footer-fixed layout-fixed theme-sandstone"
+    data-admin-utc-offset="0"
+  >
+    <div class="wrapper">
+      <nav
+        class="main-header navbar navbar-expand navbar-indigo navbar-dark border-bottom-0"
+        id="jazzy-navbar"
+      >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"
+              ><i class="fas fa-bars"></i
+            ></a>
+          </li>
+
+          
+
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="http://127.0.0.1:8000/inventory" class="nav-link">
+              <i class="nav-icon fa fa-puzzle-piece"></i> Home</a>
+            
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/" class="nav-link"><i class="nav-icon fas fa-th-large"></i>Dashboard</a>
+          </li>
+
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="http://127.0.0.1:8000/stock" class="nav-link">
+              <i class="nav-icon fa fa-database"></i>  Stock</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="http://127.0.0.1:8000/add_items" class="nav-link">
+              <i class="nav-icon fas fa-warehouse "></i>Add Stock
+        </a>
+      </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="http://127.0.0.1:8000/chart" class="nav-link">
+              <i class="nav-icon fas fa-industry"></i> Chart</a>  
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="http://127.0.0.1:8000/checkout" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>Checkout
+        </a>
+      </li>
+          
+          
+          <ul class="navbar-nav ml-auto">
+          
+            {% if request.user.is_authenticated%}
+            <li class="nav-item"><a href="/accounts/logout" class="nav-link"><i class="nav-icon fas fa-users mr-2"></i>{{ user }} | Logout</a></li>
+            {% else %}
+            <li class="nav-item"><a href="/accounts/login" class="nav-link"><i class="nav-icon fas fa-users mr-2"></i>Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        </div>
+      </nav>
+
+      <aside
+        class="main-sidebar elevation-4 sidebar-light-indigo"
+        id="jazzy-sidebar" 
+      >
+      <div id="handle" class="handle"></div>
+        <div class="brand-link navbar-indigo" id="jazzy-logo">
+          <img
+            src="/static/images/images.png"
+            alt="INVENTO Logo"
+            class="img-circle brand-image elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light"><h5><b>INVENTO</b></h5></span>
+        </div>
+
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <i class="fas fa-inverse user-profile fa-user-circle"></i>
+            </div>
+          </div>
+
+          <nav class="mt-2">
+            <ul
+              class="nav nav-pills nav-sidebar flex-column nav-flat nav-legacy nav-compact"
+              data-widget="treeview"
+              role="menu"
+              data-collapsible="false"
+            >
+            
+            <li class="nav-header">USER PANEL</li>
+            <li class="nav-item">
+              <a href="http://127.0.0.1:8000/inventory" class="nav-link">
+                <i class="nav-icon fa fa-puzzle-piece"></i>
+                <p>Home</p>
+              </a>
+            </li>
+              <li class="nav-item">
+                <a href="/admin/" class="nav-link">
+                  <i class="nav-icon fas fa-th-large"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="http://127.0.0.1:8000/stock" class="nav-link">
+                  <i class="nav-icon fa fa-database"></i>
+                  <p>Stock</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="http://127.0.0.1:8000/add_items" class="nav-link">
+                  <i class="nav-icon fas fa-warehouse "></i><p>Add Stock</p>
+            </a>
+          </li>
+              <li class="nav-item">
+                <a href="http://127.0.0.1:8000/chart" class="nav-link">
+                 <i class="nav-icon fas fa-industry"></i>
+                  <p>Chart</p>
+                </a></li>
+                <li class="nav-item">
+                  <a href="http://127.0.0.1:8000/checkout" class="nav-link">
+                    <i class="nav-icon fas fa-box"></i>
+                    <p>Checkout</p>
+                  </a></li>
+                
+                <li class="nav-item">
+                  {% if request.user.is_authenticated%}
+                  <li class="nav-item"><a href="/accounts/logout" class="nav-link"><i class="nav-icon fas fa-users mr-2"></i>{{ user }} | Logout</a></li>
+                  {% else %}
+                  <li class="nav-item"><a href="/accounts/login" class="nav-link"><i class="nav-icon fas fa-users mr-2"></i>Login</a></li>
+                  {% endif %}
+                </li>
+            </ul>
+          </nav>
+        </div>
+      </aside><br><br>
+      <footer class="main-footer">
+      {% block content %}
+      
+      <div class="container">
+        <div class="wrapper">
+          <div class="row">
+            <div class="col-md-6 ">
+              <div class="feature-box">
+                <br><br><br><br><br>
+                <h1><b>Inventory Management System</b></h1>
+                <p>The more inventory a company has, the less likely they will have what they need.</p>
+                
+              </div></div>
+              <div class="col-md-6 ">
+                <div class="feature-box">
+                <img src="https://t4.ftcdn.net/jpg/04/21/45/51/360_F_421455125_uq2szZSTeL8LoFZ6QJPBt95Hz8xDgECQ.jpg" class="feature-img">
+              </div></div><br><br><br><hr><br><br><br><br><br><br>
+              <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+                
+                  <div class="feature-box">
+                <div class="row">
+                <div class="row justify-content-center">
+                  <div class="col-md-7 text-center">
+                    <div class="feature-box">
+                      
+                      <canvas id="myChart"></canvas>
+                    </div>
+                  </div>
+            </div></div></div></div></div></footer><br><br><br><br>
+              
+              
+      {% endblock content %}
+      
+
+    <!-- jQuery -->
+    <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/static/vendor/adminlte/js/adminlte.min.js"></script>
+    <!-- Django customisations -->
+    <script src="/static/jazzmin/js/main.js"></script>
+    <script src="{% static 'script.js'%}" type="text/javascript"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#myTable').DataTable();
+      });
+    </script>
+
+<script>
+  const ctx = document.getElementById("myChart");
+
+  new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: {{labels|safe}},
+      datasets: [
+        {
+          label: "# of Quantity Avaliable",
+          data: {{data|safe}},
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      maintainAspectRatio: "responsive",
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+</script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+    </script>
+    <script>
+      const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+    </script>
+    <script>
+      const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
+    </script>
+    
+<script>
+  alertify.alert('Alert Title', 'Your Stocks Gone Low!', function(){ alertify.success('Ok'); });
+</script>
+<script>const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+    <script>
+      window.ui_changes = {
+        navbar_small_text: false,
+        footer_small_text: false,
+        body_small_text: false,
+        brand_small_text: false,
+        brand_colour: "navbar-indigo",
+        accent: "accent-indigo",
+        navbar: "navbar-indigo navbar-dark",
+        no_navbar_border: true,
+        navbar_fixed: true,
+        layout_boxed: false,
+        footer_fixed: true,
+        sidebar_fixed: true,
+        sidebar: "sidebar-light-indigo",
+        sidebar_nav_small_text: false,
+        sidebar_disable_expand: false,
+        sidebar_nav_child_indent: false,
+        sidebar_nav_compact_style: true,
+        sidebar_nav_legacy_style: true,
+        sidebar_nav_flat_style: true,
+        theme: "sandstone",
+        dark_mode_theme: null,
+        button_classes: {
+          primary: "btn-outline-primary",
+          secondary: "btn-outline-secondary",
+          info: "btn-info",
+          warning: "btn-warning",
+          danger: "btn-danger",
+          success: "btn-success",
+        },
+      };
+    </script>
+  <script>
+    var camera = window.FontAwesome.icon({ prefix: 'fas', iconName: 'camera' })
+
+  </script>
+    <script src="/static/jazzmin/js/ui-builder.js"></script>
+  </body>
+</html>

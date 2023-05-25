@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Inventory Warehouse Receipt</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-DmY9l76BQnex2QCrLh26GeEwIjHpT0ApPkxpB6xN9M+i1E6LJ/agq5f420FVjwB1"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 30px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+      .receipt-header {
+        margin-bottom: 30px;
+        position: relative;
+      }
+      .receipt-header img {
+        max-width: 200px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .receipt-header h2 {
+        text-align: center;
+        font-weight: bold;
+        color: #0058a3;
+      }
+      .receipt-header:after {
+        content: "INVENTO";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 100px;
+        font-weight: bold;
+        opacity: 0.1;
+      }
+      .receipt-details {
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 20px;
+      }
+      .receipt-details h3 {
+        margin-top: 0;
+        font-size: 24px;
+        font-weight: bold;
+        color: #0058a3;
+      }
+      .receipt-details .row {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+      }
+      .receipt-details .col {
+        text-align: right;
+        color: #666;
+      }
+      .receipt-items table {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+      .receipt-items table th {
+        background-color: #f2f2f2;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        border: none;
+      }
+      .receipt-items table td {
+        text-align: right;
+        font-size: 16px;
+        font-weight: normal;
+        color: #666;
+        border: none;
+      }
+      .receipt-items table td:first-child {
+        text-align: left;
+        color: #333;
+      }
+      .receipt-total {
+        text-align: right;
+        font-weight: bold;
+        font-size: 24px;
+        color: #0058a3;
+        margin-top: 20px;
+      }
+      .receipt-footer {
+        margin-top: 30px;
+        font-size: 14px;
+        text-align: center;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="receipt-header">
+        <img
+          src="https://dummyimage.com/200x100/0058a3/fff&text=INVENTO"
+          alt="INVENTO logo"
+        />
+        <h2>Inventory Warehouse Receipt</h2>
+      </div>
+      <div class="receipt-details">
+        <h3>Receipt Details</h3>
+        <div class="row">
+          <div class="col">Receipt No:</div>
+          <div class="col">0001</div>
+        </div>
+        <div class="row">
+          <div class="col">Date Issued:</div>
+          <div class="col">May 9, 2023</div>
+        </div>
+      </div>
+      <div class="receipt-items">
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Product A</td>
+              <td>10</td>
+              <td>$20.00</td>
+              <td>$200.00</td>
+            </tr>
+            <tr>
+              <td>Product B</td>
+              <td>5</td>
+              <td>$15.00</td>
+              <td>$75.00</td>
+            </tr>
+            <tr>
+              <td>Product C</td>
+              <td>2</td>
+              <td>$10.00</td>
+              <td>$20.00</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="receipt-total">Total: $295.00</div>
+      </div>
+      <div class="receipt-footer">
+        INVENTO | Address: 123 Main St, Anytown, USA | Phone: 555-1234 | Email:
+        info@invento.com
+      </div>
+    </div>
+  </body>
+</html>

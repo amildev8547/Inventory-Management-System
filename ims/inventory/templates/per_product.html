@@ -1,0 +1,85 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col text-right">
+      <a href="/stock" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">
+        <i class="fas fa-arrow-left"></i> Back
+      </a>
+    </div>
+  </div>
+  <br><br><br>
+  <div class="d-flex justify-contentfa-pull-right">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="card m-4" style="width: 14rem">
+        <div class="card-body">
+          <h5 class="cart-title text-center">Product Name</h5>
+          <div style="font-size: 30px" class="text-center">
+            <span><i class="fab fa-product-hunt"></i></span>
+          </div>
+          <h3 class="text-center">{{ queryset.item_name }}</h3>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card m-4" style="width: 14rem">
+          <div class="card-body">
+            <h5 class="cart-title text-center">Quantity In Stock</h5>
+            <div style="font-size: 30px" class="text-center">
+              <span><i class="fas fa-warehouse"></i></span>
+            </div>
+            <h3 class="text-center">{{ queryset.quantity }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card m-4" style="width: 14rem">
+          <div class="card-body">
+            <h5 class="cart-title text-center">Timestamp</h5>
+            <div style="font-size: 30px" class="text-center">
+              <span><i class="fas fa-warehouse"></i></span>
+            </div>
+            <h3 class="text-center">{{ queryset.timestamp }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card m-4" style="width: 14rem">
+          <div class="card-body">
+            <h5 class="cart-title text-center">Last Updated</h5>
+            <div style="font-size: 30px" class="text-center">
+              <span><i class="fas fa-warehouse"></i></span>
+            </div>
+            <h3 class="text-center">{{ queryset.last_updated }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <a href="issue_items/{{instance.id}}"
+                ><button type="button" class="btn btn-dark">
+                  ISSUE</button
+              ></a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {%endblock%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

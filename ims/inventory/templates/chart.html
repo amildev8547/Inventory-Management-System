@@ -1,0 +1,93 @@
+{% extends 'index.html' %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <div class="row">
+      <div class="feature-box">
+        <h2 class="font-weight-bold">
+          <b><center>VISUALIZATION</center></b>
+        </h2>
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      const ctx = document.getElementById("myChart");
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: {{labels|safe}},
+          datasets: [
+            {
+              label: "# of Quantity Available",
+              data: {{data|safe}},
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </div>
+</div>
+{% endblock %}
+
+<style>
+  .container {
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .feature-box {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  canvas {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Media queries */
+  @media screen and (min-width: 576px) {
+    .feature-box {
+      flex: 0 0 48%;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .feature-box {
+      flex: 0 0 31%;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    .feature-box {
+      flex: 0 0 23%;
+    }
+  }
+</style>

@@ -1,0 +1,271 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Log in | INVENTO</title>
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="/static/vendor/fontawesome-free/css/all.min.css"
+    />
+
+    <!-- Bootstrap and adminLTE -->
+    <link
+      rel="stylesheet"
+      href="/static/vendor/adminlte/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css"
+    />
+
+    <!-- Bootswatch theme -->
+
+    <link
+      rel="stylesheet"
+      href="/static/vendor/bootswatch/sandstone/bootstrap.min.css"
+      id="jazzmin-theme"
+    />
+
+    <!-- Custom fixes for django -->
+    <link rel="stylesheet" href="/static/jazzmin/css/main.css" />
+
+    <!-- favicons -->
+    <link
+      rel="shortcut icon"
+      href="/static/images/images.png"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="/static/images/images.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      rel="stylesheet"
+      media="screen and (max-width: 767px)"
+      href="mobile.css"
+    />
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+      rel="stylesheet"
+    />
+    <style>
+      @media (max-width: 767px) {
+        /* Styles for screens smaller than 768px */
+      }
+      .animate-charcter {
+        text-transform: uppercase;
+        background-image: linear-gradient(
+          -225deg,
+          #231557 0%,
+          #44107a 29%,
+          #ff1361 67%,
+          #fff800 100%
+        );
+        background-size: auto auto;
+        background-clip: border-box;
+        background-size: 200% auto;
+        color: #fff;
+        background-clip: text;
+        text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textclip 2s linear infinite;
+        display: inline-block;
+        font-size: 100px;
+      }
+
+      @keyframes textclip {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .dot {
+        width: 36px;
+        height: 36px;
+        background: #3ac;
+        border-radius: 100%;
+        display: inline-block;
+        animation: slide 1s infinite;
+      }
+      .dot:nth-child(1) {
+        animation-delay: 0.1s;
+        background: #32aacc;
+      }
+      .dot:nth-child(2) {
+        animation-delay: 0.2s;
+        background: #64aacc;
+      }
+      .dot:nth-child(3) {
+        animation-delay: 0.3s;
+        background: #96aacc;
+      }
+      .dot:nth-child(4) {
+        animation-delay: 0.4s;
+        background: #c8aacc;
+      }
+      .dot:nth-child(5) {
+        animation-delay: 0.5s;
+        background: #faaacc;
+      }
+      @-moz-keyframes slide {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scale(2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      @-webkit-keyframes slide {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scale(2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      @-o-keyframes slide {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scale(2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      @keyframes slide {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scale(2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content" style="display: none">
+      <div class="container">
+        <div class="wrapper">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="feature-box">
+                <br /><br /><br />
+                <h5 class="animate-charcter">
+                  <b>INVENTO</b>
+                </h5>
+                <br />
+                <h2>
+                  <b>INVENTORY MANAGEMENT SYSTEM</b>
+                </h2>
+                <p>Determine what your customers need, and work backwards.</p>
+                <img
+                  src="https://img.freepik.com/premium-vector/flat-isometric-concept-illustration-data-delivery-location-information_18660-1949.jpg?w=450"
+                  class="feature-img"
+                />
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="shadow-lg p-3 mb-5 bg-body rounded">
+                <div class="card">
+                  <br /><br />
+                  <div class="login-box">
+                    <div class="login-logo">
+                      <h1>
+                        <picture>
+                          <source
+                            srcset="/static/images/images.png"
+                            media="(prefers-color-scheme: dark)"
+                          />
+                          <img src="/static/images/images.png" alt="INVENTO" />
+                        </picture>
+                      </h1>
+                    </div>
+
+                    <div class="wrapper text-center">
+                      <div class="card-body">
+                        {% block title%} {% endblock%} {% block content%}
+                        {%endblock %}
+
+                        <a href="/accounts/login">Login Again</a>
+                        <div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <center>
+          <strong>Copyright &copy; 2023 AmilDev Pvt Ltd.</strong>
+          All rights reserved.
+        </center>
+      </div>
+    </div>
+    <div id="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <script>
+      window.addEventListener("load", function () {
+        showLoader();
+        setTimeout(showContent, 2000); // Show content after 3 seconds (3000 milliseconds)
+      });
+
+      function showLoader() {
+        document.getElementById("loader").style.display = "block";
+      }
+
+      function showContent() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      }
+    </script>
+    <!-- jQuery -->
+    <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/static/vendor/adminlte/js/adminlte.min.js"></script>
+  </body>
+</html>

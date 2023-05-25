@@ -1,0 +1,137 @@
+{% extends "index.html" %} {% block content %}
+<div class="container"><br>
+  
+    {%if messages %} 
+    <div class="alert alert-primary" role="alert">
+    <ul class="messages">
+    {%for message in messages %}
+    <li{% if message.tags%} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+    {%endfor%}
+  </ul> 
+</div>
+  {% endif%}
+  
+  <div>
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+  <h2 class="font-weight-bold">
+    <b><center>INVENTORY <a href="http://127.0.0.1:8000/add_items">
+      <button type="button" class="btn btn-light" data-mdb-ripple-color="dark" data-bs-toggle="tooltip" data-bs-placement="top"
+      data-bs-custom-class="custom-tooltip"
+      data-bs-title="This will redirect to Add Stock page"><i class='fas fa-th-large' style='font-size:24px'></i></button></a></center></b>
+  </h2></div>
+  
+    <div class="wrapper text-center">
+      
+      <div class="col-md-12">
+        <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">COUNT</th>
+            <th scope="col">CATEGORY</th>
+            <th scope="col">ITEM NAME</th>
+            <th scope="col">QUANTITY IN STORE</th>
+            <th class="col">STOCK CREATED</th>
+            <th class="col">LAST UPDATED</th>
+            <th class="col">REORDER LEVEL</th>
+            <th class="col">UPDATE STOCK</th>
+            <th class="col">DELETE STOCK</th>
+            <th class="col">ISSUE STOCK</th>
+
+          </tr>
+         
+        </thead>
+       
+        <tbody>
+          {% for instance in queryset %}
+          
+          <tr >
+            <td scope="col">{{ forloop.counter }}</td>
+            <td scope="col">{{instance.category }}</td>
+            <td scope="col">
+              <div style="cursor: pointer; cursor: hand"
+              onclick="window.location='{% url 'per_product' instance.id%}'">{{instance.item_name }}</div></td>
+            <td scope="col">
+              {% if instance.quantity <= 0 %}
+                     <div style="color: red">Out of Stock</div>
+              {% elif instance.quantity <= instance.reorder_level %}
+                     <div style="background-color: orange; cursor: pointer; cursor: hand"
+                      onclick="window.location='{% url 'update_items' instance.id%}'"data-mdb-ripple-color="dark" data-bs-toggle="tooltip" data-bs-placement="top"
+                      data-bs-custom-class="custom-tooltip"
+                      data-bs-title="Low Quantity!!">{{instance.quantity}}</div>
+              {% else %}
+                    <div style="cursor: pointer; cursor: hand"
+                     onclick="window.location='{% url 'update_items' instance.id%}">{{instance.quantity}}</div>
+              {% endif %}
+            
+            <td scope="col">{{instance.timestamp}}</td>
+            <td scope="col">{{instance.last_updated}}</td>
+            <td scope="col">{{instance.reorder_level}}</td> 
+            <td scope="col">
+              <a href="update_items/{{instance.id}}"
+                ><button type="button" class="btn btn-light" data-mdb-ripple-color="dark" data-bs-toggle="tooltip" data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="You can update the item details" >
+                  <i class="fas fa-edit"></i></button
+              ></a></td>
+
+              <td scope="col"><a href="delete_items/{{instance.id}}"
+                ><button type="button" class="btn btn-light" data-mdb-ripple-color="dark" data-bs-toggle="tooltip" data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="This will delete the item">
+                  <i class="fa fa-trash" aria-hidden="true"></i></button
+              ></a>
+            </td>
+            <td scope="col"><a href="issue_items/{{instance.id}}"
+              ><button type="button" class="btn btn-light" data-mdb-ripple-color="dark" data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              data-bs-title="This will redirect to the issue page"><i class="fas fa-shipping-fast" aria-hidden="true"></i>
+                </button
+            ></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table></div>
+      <div> <form method="POST" action="">
+        {% csrf_token %} {{ form }}
+        <input type="submit" class="btn btn-dark" value="Export" data-mdb-ripple-color="dark" data-bs-toggle="tooltip" data-bs-placement="top"
+        data-bs-custom-class="custom-tooltip"
+        data-bs-title="This will export the CSV file of whole item list" id="liveToastBtn"/>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              
+              <strong class="me-auto">INVENTO</strong>
+              <small>Just Now</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              Exported CSV file!!
+            </div>
+          </div>
+        </div>
+      </form>
+      
+      </div><br>
+      <div id="pagination">
+        {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; First</a>
+          <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+  
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+  
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">Next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+      </div>
+</div>
+      
+
+      
+</div>
+    </div>
+  </div>
+  {% endblock %}
+</div>
